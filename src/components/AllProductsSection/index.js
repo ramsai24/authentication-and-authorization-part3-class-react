@@ -23,6 +23,19 @@ class AllProductsSection extends Component {
       },
     }
     const response = await fetch(apiUrl, options)
+    if (response.ok === true) {
+      const fetchedData = await response.json()
+      const updatedData = fetchedData.products.map(each => ({
+        title: each.title,
+        brand: each.brand,
+        price: each.price,
+        id: each.id,
+        imageUrl: each.image_url,
+        rating: each.rating,
+      }))
+
+      this.setState({productsList: updatedData})
+    }
   }
 
   renderProductsList = () => {
